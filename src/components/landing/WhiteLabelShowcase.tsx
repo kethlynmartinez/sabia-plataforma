@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 const SAMPLES = [
   { key: "padrao", company: "Padrão da plataforma", name: "Sabiá Estudos", initials: "SE", primary: "#272A2E", highlight: "#E9B21F" },
   { key: "vertice", company: "Vértice Logística", name: "Vértice Aprende", initials: "VA", primary: "#0F766E", highlight: "#F59E0B" },
-  { key: "aurora", company: "Clínica Aurora", name: "Escola Aurora", initials: "EA", primary: "#BE185D", highlight: "#0EA5E9" },
+  { key: "aurora", company: "Clínica Aurora", name: "Aurora Aprende", initials: "AA", primary: "#BE185D", highlight: "#0EA5E9" },
 ] as const;
 
 /** Mini-app que troca de identidade visual ao vivo — o white-label na prática. */
