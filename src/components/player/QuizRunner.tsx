@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Award, CheckCircle2, ClipboardCheck, Lock, RotateCcw, XCircle } from "lucide-react";
-import { Selo } from "@/components/brand/Selo";
+import { Award, CheckCircle2, ClipboardCheck, Lock, RotateCcw, Trophy, XCircle } from "lucide-react";
 import { toast } from "sonner";
 import { learningApi, type QuizResult } from "@/services/api";
 import type { MyCourse } from "@/types";
@@ -65,13 +64,9 @@ export const QuizRunner = ({
     return (
       <div className="space-y-5">
         <div className={cn("card overflow-hidden p-8 text-center", attempt.passed ? "border-success/30" : "border-warning/30")}>
-          {attempt.passed ? (
-            <Selo name="conquista" className="mx-auto h-32 -rotate-2" />
-          ) : (
-            <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-warning-soft text-warning">
-              <RotateCcw className="h-8 w-8" />
-            </span>
-          )}
+          <span className={cn("mx-auto flex h-16 w-16 items-center justify-center rounded-2xl", attempt.passed ? "bg-success-soft text-success" : "bg-warning-soft text-warning")}>
+            {attempt.passed ? <Trophy className="h-8 w-8" /> : <RotateCcw className="h-8 w-8" />}
+          </span>
           <p className="mt-5 font-sora text-5xl font-extrabold">{attempt.score}%</p>
           <h2 className="mt-2 font-sora text-xl font-bold">{attempt.passed ? "Aprovado(a)! Parabéns" : "Ainda não foi dessa vez"}</h2>
           <p className="mx-auto mt-2 max-w-md font-dm text-sm text-muted-foreground">

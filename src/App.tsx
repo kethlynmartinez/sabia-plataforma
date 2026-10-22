@@ -63,7 +63,7 @@ const App = () => (
       <AuthProvider>
         <TooltipProvider delayDuration={200}>
           <Toaster />
-          <ErrorBoundary>
+          <ErrorBoundary selo>
             <Suspense fallback={<FullScreenLoader />}>
               <Routes>
                 <Route path="/" element={<Landing />} />

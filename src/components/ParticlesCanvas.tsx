@@ -20,7 +20,7 @@ interface ParticlesCanvasProps {
 export const ParticlesCanvas = ({
   count = 50,
   className = "",
-  colors = ["140,122,255", "96,165,250", "255,255,255"],
+  colors = ["233,178,31", "170,174,180", "255,255,255"],
 }: ParticlesCanvasProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 

@@ -3,7 +3,6 @@ import { Loader2, Star, type LucideIcon } from "lucide-react";
 import type { CourseStatus } from "@/types";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
-import { Selo } from "@/components/brand/Selo";
 
 /* ------------------------------ Cabeçalho de página ------------------------------ */
 
@@ -185,7 +184,6 @@ export const PageLoader = () => (
 
 export const ErrorState = ({ message, onRetry }: { message: string; onRetry?: () => void }) => (
   <div className="rounded-2xl border border-destructive/20 bg-destructive/5 p-6 text-center">
-    <Selo name="erro" className="mx-auto mb-3 h-20" />
     <p className="font-dm text-sm text-destructive">{message}</p>
     {onRetry && (
       <button onClick={onRetry} className="btn-outline btn-sm mt-4">

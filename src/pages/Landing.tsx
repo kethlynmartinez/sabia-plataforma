@@ -284,7 +284,11 @@ const Landing = () => {
         <div className="pointer-events-none absolute right-0 top-0 h-[400px] w-[400px] rounded-full bg-primary/25 blur-[130px]" />
         <div className="container relative">
           <Reveal>
-            <SectionTitle light eyebrow="Recursos" title="Tudo o que um LMS corporativo precisa. Nada que atrapalhe." />
+            <div className="text-center">
+              <Selo name="conquista" className="mx-auto mb-6 h-32 -rotate-2" />
+              <p className="eyebrow text-primary-light">Recursos</p>
+              <h2 className="mt-3 font-sora text-3xl font-bold leading-tight text-white text-balance md:text-[40px] lg:whitespace-nowrap">Tudo o que um LMS corporativo precisa.</h2>
+            </div>
           </Reveal>
           <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {FEATURES.map((f, i) => (
