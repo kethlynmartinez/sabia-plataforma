@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 56">
+  <g transform="translate(2 4)">
+    <rect width="48" height="48" rx="12" fill="#0F766E"/>
+    <path d="M11 13l13 24 13-24" fill="none" stroke="#fff" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="24" cy="12" r="3.6" fill="#F59E0B"/>
+  </g>
+  <text x="62" y="27" font-family="Sora, system-ui, sans-serif" font-size="20" font-weight="700" fill="#0B3B37">Vértice</text>
+  <text x="62" y="46" font-family="DM Sans, system-ui, sans-serif" font-size="12" font-weight="600" letter-spacing="2.4" fill="#0F766E">LOGÍSTICA</text>
+</svg>

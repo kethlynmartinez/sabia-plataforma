@@ -1,0 +1,221 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Tokens em HSL (sem hsl()) para permitir opacidade no Tailwind: bg-primary/10.
+ * :root = identidade padrão da plataforma (preto, cinzas e o amarelo do bico do sabiá-una).
+ * .brand-dark = mesma identidade nas áreas escuras do site, com o amarelo como cor de ação.
+ * Dentro da área logada, o tema da empresa sobrescreve os tokens --primary* e
+ * --highlight* em tempo de execução (ver src/lib/theme.ts).
+ */
+@layer base {
+  :root {
+    --background: 60 8% 97%;
+    --foreground: 220 10% 11%;
+    --surface: 0 0% 100%;
+
+    --ink: 220 8% 7%;
+    --ink-soft: 220 6% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 10% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 10% 11%;
+
+    --primary: 216 8% 17%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 216 8% 9%;
+    --primary-light: 216 6% 42%;
+    --primary-soft: 220 10% 94%;
+    --primary-strong: 220 8% 6%;
+
+    --highlight: 43 82% 52%;
+    --highlight-foreground: 220 10% 9%;
+    --highlight-soft: 46 90% 92%;
+
+    --secondary: 220 8% 95%;
+    --secondary-foreground: 220 10% 11%;
+    --muted: 220 8% 95%;
+    --muted-foreground: 220 6% 40%;
+    --accent: 220 8% 93%;
+    --accent-foreground: 220 10% 11%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 152 69% 35%;
+    --success-soft: 145 70% 94%;
+    --warning: 32 95% 44%;
+    --warning-soft: 45 100% 93%;
+
+    --border: 220 8% 88%;
+    --input: 220 7% 83%;
+    --ring: 216 8% 17%;
+    --placeholder: 220 5% 58%;
+    --shadow-color: 220 15% 12%;
+
+    --radius: 0.75rem;
+  }
+
+  /* Áreas escuras do site: o amarelo do bico vira a cor de ação */
+  .brand-dark {
+    --primary: 43 82% 52%;
+    --primary-foreground: 220 10% 9%;
+    --primary-hover: 43 82% 45%;
+    --primary-light: 45 95% 68%;
+    --primary-strong: 40 80% 30%;
+    --ring: 43 82% 52%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  html,
+  body {
+    @apply bg-background text-foreground;
+    font-family: "DM Sans", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Sora", system-ui, sans-serif;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  /* evita palavra sozinha na última linha de parágrafos */
+  p,
+  li,
+  blockquote,
+  dd {
+    text-wrap: pretty;
+  }
+  ::placeholder {
+    color: hsl(var(--placeholder));
+  }
+  ::selection {
+    background: hsl(var(--primary) / 0.18);
+  }
+}
+
+@layer components {
+  .field {
+    @apply w-full rounded-[10px] border-[1.5px] border-input bg-white px-3.5 py-2.5 font-dm text-sm text-foreground transition-[border-color,box-shadow] duration-150;
+  }
+  .field:focus {
+    @apply outline-none border-primary;
+    box-shadow: 0 0 0 4px hsl(var(--primary) / 0.12);
+  }
+  .field[aria-invalid="true"] {
+    @apply border-destructive;
+  }
+  .field:disabled {
+    @apply cursor-not-allowed bg-muted text-muted-foreground;
+  }
+  .field-label {
+    @apply mb-1.5 block font-sora text-xs font-semibold text-foreground/80;
+  }
+  .field-error {
+    @apply mt-1 font-dm text-xs text-destructive;
+  }
+  .card {
+    @apply rounded-2xl border border-border/70 bg-card shadow-card;
+  }
+  .eyebrow {
+    @apply font-sora text-[11px] font-semibold uppercase tracking-[0.14em];
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[10px] px-4 py-2.5 font-dm text-sm font-semibold transition-all duration-150 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/25 disabled:cursor-not-allowed disabled:opacity-55 [&_svg]:h-4 [&_svg]:w-4 [&_svg]:shrink-0;
+  }
+  .btn-primary {
+    @apply btn bg-primary text-primary-foreground hover:bg-primary-hover active:scale-[0.98];
+  }
+  .btn-outline {
+    @apply btn border-[1.5px] border-primary bg-transparent text-primary hover:bg-primary-soft;
+  }
+  .btn-ghost {
+    @apply btn text-foreground/75 hover:bg-muted hover:text-foreground;
+  }
+  .btn-soft {
+    @apply btn bg-primary-soft text-primary hover:bg-primary/15;
+  }
+  .btn-danger {
+    @apply btn bg-destructive text-destructive-foreground hover:bg-destructive/90;
+  }
+  .btn-sm {
+    @apply px-3 py-1.5 text-[13px];
+  }
+  .icon-btn {
+    @apply inline-flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-primary-soft hover:text-primary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/25 [&_svg]:h-[18px] [&_svg]:w-[18px];
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 font-dm text-[11px] font-semibold;
+  }
+}
+
+@layer utilities {
+  .font-sora {
+    font-family: "Sora", system-ui, sans-serif;
+  }
+  .font-dm {
+    font-family: "DM Sans", system-ui, sans-serif;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .bg-grid {
+    background-image: linear-gradient(hsl(0 0% 100% / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(0 0% 100% / 0.05) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+  }
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+}
+
+/* Impressão do certificado: só a área .print-area aparece */
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+  body * {
+    visibility: hidden !important;
+  }
+  .print-area,
+  .print-area * {
+    visibility: visible !important;
+  }
+  .print-area {
+    position: fixed !important;
+    inset: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
