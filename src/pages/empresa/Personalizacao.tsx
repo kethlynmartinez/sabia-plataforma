@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { AlertTriangle, Award, BookOpen, Check, Copy, Home, MonitorSmartphone, RotateCcw, Save, UserRound } from "lucide-react";
+import { AlertTriangle, Award, BookOpen, Home, MonitorSmartphone, RotateCcw, Save, UserRound } from "lucide-react";
 import { toast } from "sonner";
 import { companyApi } from "@/services/api";
 import { useAuth } from "@/hooks/useAuth";
@@ -20,7 +20,7 @@ const PALETTES = [
   { name: "Aurora", primary: "#BE185D", highlight: "#0EA5E9" },
   { name: "Oceano", primary: "#1D4ED8", highlight: "#22C55E" },
   { name: "Terracota", primary: "#C2410C", highlight: "#0D9488" },
-  { name: "Grafite", primary: "#1F2937", highlight: "#EAB308" },
+  { name: "Ameixa", primary: "#6D28D9", highlight: "#F472B6" },
 ];
 
 const ColorField = ({ label, value, onChange, hint }: { label: string; value: string; onChange: (v: string) => void; hint: string }) => {
@@ -125,7 +125,6 @@ const Personalizacao = () => {
   const qc = useQueryClient();
   const [draft, setDraft] = useState<CompanyTheme>(() => company!.theme);
   const [preview, setPreview] = useState<"login" | "app">("login");
-  const [copied, setCopied] = useState(false);
 
   const dirty = useMemo(() => JSON.stringify(draft) !== JSON.stringify(company?.theme), [draft, company]);
   const set = (patch: Partial<CompanyTheme>) => setDraft((d) => ({ ...d, ...patch }));
@@ -143,17 +142,6 @@ const Personalizacao = () => {
   });
 
   if (!company) return null;
-  const portalUrl = `${window.location.origin}${window.location.pathname}#/e/${company.slug}`;
-
-  const copy = async () => {
-    try {
-      await navigator.clipboard.writeText(portalUrl);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      toast.error("Não foi possível copiar o link");
-    }
-  };
 
   return (
     <>
@@ -260,16 +248,6 @@ const Personalizacao = () => {
             {dirty && <p className="mt-3 text-center font-dm text-xs text-warning">Pré-visualização com alterações ainda não aplicadas</p>}
           </div>
 
-          <div className="card mt-5 p-5">
-            <h2 className="font-sora text-sm font-semibold">Link de acesso da equipe</h2>
-            <p className="mt-1 font-dm text-xs text-muted-foreground text-pretty">É por este endereço que os colaboradores entram. Ele já vai junto na mensagem de boas-vindas.</p>
-            <div className="mt-3 flex gap-2">
-              <code className="min-w-0 flex-1 truncate rounded-lg bg-muted px-3 py-2 font-mono text-xs">{portalUrl}</code>
-              <button className="icon-btn border border-border" onClick={copy} aria-label="Copiar link">
-                {copied ? <Check className="text-success" /> : <Copy />}
-              </button>
-            </div>
-          </div>
         </aside>
       </div>
     </>
